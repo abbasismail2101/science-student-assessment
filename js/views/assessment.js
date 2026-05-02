@@ -200,6 +200,12 @@
       debouncedSuggest(studentId, text, box, buttons);
     }
 
+    function sourceLabel(s) {
+      if (s === "claude") return "Claude";
+      if (s === "gemini") return "Gemini";
+      return "local";
+    }
+
     function renderSuggestion(box, result, onAccept) {
       box.className = "suggestion";
       box.innerHTML = "";
@@ -207,7 +213,7 @@
         el("div", null, [
           el("strong", null, `Suggested: ${result.level}`),
           " ",
-          el("span", { class: "meta" }, result.source === "ai" ? "(Claude)" : "(local)"),
+          el("span", { class: "meta" }, "(" + sourceLabel(result.source) + ")"),
         ])
       );
       if (result.reason) {

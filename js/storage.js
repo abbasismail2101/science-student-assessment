@@ -7,7 +7,7 @@
   }
 
   function defaultSettings() {
-    return { apiKey: "", aiEnabled: true };
+    return { provider: "local", apiKey: "", geminiKey: "", aiEnabled: true };
   }
 
   function uid(prefix) {
@@ -41,7 +41,12 @@
     try {
       const raw = localStorage.getItem(SETTINGS_KEY);
       if (!raw) return defaultSettings();
-      return Object.assign(defaultSettings(), JSON.parse(raw));
+      const merged = Object.assign(defaultSettings(), JSON.parse(raw));
+      // Backwards-compat: older versions stored only apiKey (Anthropic) without provider.
+      if (!merged.provider || merged.provider === "local") {
+        if (merged.apiKey) merged.provider = "claude";
+      }
+      return merged;
     } catch (e) {
       return defaultSettings();
     }

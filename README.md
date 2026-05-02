@@ -13,7 +13,7 @@ All data is stored locally in your browser. Nothing is sent to any server unless
 - **Class overview** table — see every student's overall level across recent assessments at a glance.
 - **Per-student progress view** with full history.
 - **Printable report card** for each student (use your browser's print dialog).
-- **AI observation evaluator** — when you write an observation note, the app suggests a rubric level (you confirm or override). Uses Claude when an API key is configured, otherwise a local keyword-based scorer (works offline).
+- **AI observation evaluator** — when you write an observation note, the app suggests a rubric level (you confirm or override). Choose your provider in Settings: built-in local keyword scorer (offline, no setup), **Google Gemini** (free with a Google account), or **Anthropic Claude** (paid pay-as-you-go).
 - **Export / Import** your data as JSON for backup or moving between devices.
 
 ## How to run
@@ -39,15 +39,24 @@ You can either:
 
 ## AI observation evaluator (optional)
 
-By default the app uses a built-in keyword-based scorer for observation notes. To use Claude for higher-quality suggestions:
+By default the app uses a built-in keyword-based scorer that works offline with no setup. You can also pick one of two AI providers in **Settings → Provider**:
 
-1. Get an API key at <https://console.anthropic.com>.
-2. Open **Settings** in the app and paste your key. Click **Save**.
-3. The next time you type into an observation field, the suggestion comes from Claude.
+### Option A — Google Gemini (free)
 
-The app calls the Anthropic API directly from the browser using `claude-haiku-4-5-20251001`.
+1. Go to <https://aistudio.google.com/app/apikey> and sign in with a Google account.
+2. Click **Create API key** and copy the key (starts with `AIza...`).
+3. In the app, open **Settings**, set **Provider** to **Google Gemini**, paste the key, and click **Save**.
 
-> **Important:** your API key is stored in this browser's `localStorage`, which means anyone with access to this browser/device could read it. Use the **Clear key** button on shared computers.
+The free tier on Gemini 2.5 Flash is plenty for daily classroom use (no credit card required).
+
+### Option B — Anthropic Claude (paid)
+
+1. Get an API key at <https://console.anthropic.com> (requires adding billing — a few dollars of credit lasts a long time).
+2. In the app, open **Settings**, set **Provider** to **Anthropic Claude**, paste the key, and click **Save**.
+
+The app uses `claude-haiku-4-5` for fast, low-cost classifications.
+
+> **Important:** API keys are stored in this browser's `localStorage`, which means anyone with access to this browser/device could read them. Use the **Clear keys** button on shared computers.
 
 ## Backing up your data
 
